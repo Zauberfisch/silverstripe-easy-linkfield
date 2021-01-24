@@ -1,0 +1,32 @@
+{
+	"name": "zauberfisch/silverstripe-easy-linkfield",
+	"description": "SilverStripe inline link field that allows adding one or multiple links to any object and saves into a single DB field",
+	"type": "silverstripe-vendormodule",
+	"keywords": [
+		"silverstripe",
+		"serialize",
+		"link",
+		"dbfield"
+	],
+	"license": "BSD-3-Clause",
+	"authors": [
+		{
+			"name": "Zauberfisch",
+			"email": "code@zauberfisch.at"
+		}
+	],
+	"require": {
+		"php": "^7.1",
+		"ext-json": "*",
+		"silverstripe/framework": "^4.5",
+		"silverstripe/vendor-plugin": "*",
+		"zauberfisch/silverstripe-serialized-dataobject": "^4"
+	},
+	"autoload": {
+		"psr-4": {
+			"zauberfisch\\LinkField\\": "src/"
+		}
+	},
+	"prefer-stable": true,
+	"minimum-stability": "dev"
+}
