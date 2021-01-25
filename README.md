@@ -6,10 +6,10 @@ Editing happens inline in the form field, no GridField or popup is used
 ## Screenshots
 
 Empty LinkList:  
-![](http://paste.zauberfisch.com/i/600e0dc1c4323/linkfield-empty.png)
+![](https://paste.zauberfisch.com/i/600e0dc1c4323/linkfield-empty.png)
 
 LinkList with 6 links (all possible types):  
-![](http://paste.zauberfisch.com/i/600e0dc1c4323/linkfield-all.png)
+![](https://paste.zauberfisch.com/i/600e0dc1c4323/linkfield-all.png)
 
 
 ## Know Bugs/Limitations (fixes are being worked on)
