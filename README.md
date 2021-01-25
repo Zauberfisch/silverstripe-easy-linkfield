@@ -1,7 +1,7 @@
 # SilverStripe (inline) LinkField module
 
-Allows adding one or multiple links to any object and saves into a single DB field
-Editing happens inline in the form field, no GridField or popup is used
+Allows adding one or multiple links to any object and saves into a single DB field.  
+Editing happens inline in the form field, no GridField or popup is used.  
 
 ## Screenshots
 
