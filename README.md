@@ -57,7 +57,9 @@ class Page extends SilverStripe\CMS\Model\SiteTree {
 }
 ```
 
-You can also limit the types of links that are allowed (possible values are: 'internal', 'external', 'file', 'email', 'phone'):
+#### Restrict link types
+
+You can also limit the types of links that are allowed (builtin link types are: 'internal', 'external', 'file', 'email', 'phone'):
 
 ```php
 <?php
@@ -78,7 +80,8 @@ class MyClass extends \SilverStripe\ORM\DataObject {
 }
 ```
 
-Accessing the values in php:
+#### Accessing the values in php
+
 ```php
 $list = $page->obj('Buttons')->getValue(); // $page being a Page object with a field Buttons from the example above
 foreach($list as $button) {
@@ -94,11 +97,88 @@ foreach($list as $button) {
 }
 ```
 
-Accessing the values in a template:
+#### Accessing the values in a template
+
 ```html
 <% loop $Buttons.getValue %>
     <!-- Always available Variables: $Link, $AbsoluteLink, $LinkType, $Title, $NewTab -->
     <!-- And depending on the type: $Page (internal), $PageID (internal), $URL (external), $File (file), $FileID (file), $Email (email), $CountryPrefix (phone), $Number (phone), $PhoneNumber (phone) -->
     <a href="$Link" <% if $NewTab %>target="_blank"<% end_if %>>$Title</a>
 <% end_loop %>
+```
+
+#### Creating custom link type (eg for a DataObject)
+
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace app\model\shop;
+
+class Product extends DataObject {
+  public function Link() { return "/shop/product-{$this->ID}/"; }
+  public function AbsoluteLink() { return \SilverStripe\Control\DIrector::absoluteURL($this->Link()); }
+}
+```
+```yml
+# /app/_config/extensions.yml
+zauberfisch\LinkField\LinkListField:
+  link_types:
+    product: 'app\model\ProductLink'
+```
+```php
+# /app/src/model/ProductLink.php
+<?php
+
+declare(strict_types=1);
+
+namespace app\model;
+
+use app\shop\Product;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
+use zauberfisch\LinkField\Link\AbstractLink;
+
+/**
+ * @property string $ProductID
+ * @method string|int getProductID()
+ * @method static setProductID(int $productID)
+ */
+class ProductLink extends AbstractLink {
+	private static $fields = [
+		'ProductID',
+	];
+
+	public function getCMSFields(): FieldList {
+		$fields = parent::getCMSFields();
+		$fields->insertBefore(
+			'NewTab',
+			new DropdownField('ProductID', $this->fieldLabel('Product'), Product::get()->map()->toArray())
+		);
+		return $fields;
+	}
+
+	/**
+	 * @return \SilverStripe\ORM\DataObject|null|Product
+	 */
+	public function getProduct(): ?Product {
+		return $this->getProductID() ? Product::get()->byID($this->getProductID()) : null;
+	}
+
+	public function getLink(): string {
+		$product = $this->getProduct();
+		return $product && $product->exists() ? $product->Link() : '';
+	}
+
+	public function getAbsoluteLink(): string {
+		$product = $this->getProduct();
+		return $product && $product->exists() ? $product->AbsoluteLink() : '';
+	}
+
+	public function getLinkType(): string {
+		return 'product';
+	}
+}
 ```
