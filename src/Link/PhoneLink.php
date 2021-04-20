@@ -21,7 +21,7 @@ class PhoneLink extends AbstractLink {
 		'NumberWithoutPrefix',
 	];
 
-	public function getCMSFields() : FieldList {
+	public function getCMSFields(): FieldList {
 		$fields = parent::getCMSFields();
 		$countryMap = [];
 		$fields->insertBefore('NewTab',
@@ -38,15 +38,19 @@ class PhoneLink extends AbstractLink {
 		return $fields;
 	}
 
-	public function getPhoneNumber() :string {
+	public function getPhoneNumber(): string {
 		return $this->CountryPrefix . $this->NumberWithoutPrefix;
 	}
 
-	public function getLink() :string {
-		return sprintf('tel:%s', $this->getPhoneNumber());
+	public function PhoneNumber(): string {
+		return $this->getPhoneNumber();
 	}
 
-	public function getLinkType() :string {
+	public function getLink(): string {
+		return sprintf('tel:%s', $this->getPhoneNumber());
+	}
+	
+	public function getLinkType(): string {
 		return 'phone';
 	}
 }

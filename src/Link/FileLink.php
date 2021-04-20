@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace zauberfisch\LinkField\Link;
 
 use SilverStripe\Assets\File;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
 use zauberfisch\SerializedDataObject\Form\UploadField;
 
@@ -33,6 +34,13 @@ class FileLink extends AbstractLink {
 	 */
 	public function getFile(): ?File {
 		return $this->getFileID() ? File::get()->byID($this->getFileID()) : null;
+	}
+
+	/**
+	 * @return \SilverStripe\ORM\DataObject|null|File
+	 */
+	public function File(): ?File {
+		return $this->getFile();
 	}
 
 	public function getLink(): string {

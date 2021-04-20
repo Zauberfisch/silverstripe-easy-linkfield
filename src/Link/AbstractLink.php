@@ -35,9 +35,21 @@ abstract class AbstractLink extends AbstractDataObject {
 
 	abstract public function getLink(): string;
 
+	public function Link(): string {
+		return $this->getLink();
+	}
+
 	public function getAbsoluteLink(): string {
 		return $this->getLink();
 	}
 
+	public function AbsoluteLink(): string {
+		return $this->getAbsoluteLink();
+	}
+
 	abstract public function getLinkType(): string;
+
+	public function LinkType(): string {
+		return $this->getLinkType();
+	}
 }

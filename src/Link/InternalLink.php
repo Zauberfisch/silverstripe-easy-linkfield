@@ -47,6 +47,13 @@ class InternalLink extends AbstractLink {
 		return $this->getPageID() ? SiteTree::get()->byID($this->getPageID()) : null;
 	}
 
+	/**
+	 * @return \SilverStripe\ORM\DataObject|null|SiteTree
+	 */
+	public function Page(): ?SiteTree {
+		return $this->getPage();
+	}
+
 	public function getLink(): string {
 		$page = $this->getPage();
 		return $page && $page->exists() ? $page->Link() : '';

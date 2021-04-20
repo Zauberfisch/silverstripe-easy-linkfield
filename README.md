@@ -1,14 +1,14 @@
 # SilverStripe (inline) LinkField module
 
-Allows adding one or multiple links to any object and saves into a single DB field.  
-Editing happens inline in the form field, no GridField or popup is used.  
+Allows adding one or multiple links to any object and saves into a single DB field.
+Editing happens inline in the form field, no GridField or popup is used.
 
 ## Screenshots
 
-Empty LinkList:  
+Empty LinkList:
 ![](https://paste.zauberfisch.com/i/600e0dc1c4323/linkfield-empty.png)
 
-LinkList with 6 links (all possible types):  
+LinkList with 6 links (all possible types):
 ![](https://paste.zauberfisch.com/i/600e0dc1c4323/linkfield-all.png)
 
 
@@ -101,8 +101,10 @@ foreach($list as $button) {
 
 ```html
 <% loop $Buttons.getValue %>
-    <!-- Always available Variables: $Link, $AbsoluteLink, $LinkType, $Title, $NewTab -->
-    <!-- And depending on the type: $Page (internal), $PageID (internal), $URL (external), $File (file), $FileID (file), $Email (email), $CountryPrefix (phone), $Number (phone), $PhoneNumber (phone) -->
+    <%-- Always available Variables: $Link, $AbsoluteLink, $LinkType, $Title, $NewTab --%>
+    <%-- And depending on the type: $Page (internal), $PageID (internal), $URL (external), $File (file), $FileID (file), $Email (email), $CountryPrefix (phone), $Number (phone), $PhoneNumber (phone) --%>
+    <%-- If you use fields depending on the type, you have to check for the type first, otherwise you will get an error that the field was not found --%>
+    <%-- For example <% if $LinkType == 'internal' %>The Link is $Link and the PAGE URLSegment is $Page.URLSegment<% end_if %> --%>
     <a href="$Link" <% if $NewTab %>target="_blank"<% end_if %>>$Title</a>
 <% end_loop %>
 ```
