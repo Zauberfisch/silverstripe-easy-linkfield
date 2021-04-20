@@ -168,6 +168,13 @@ class ProductLink extends AbstractLink {
 	public function getProduct(): ?Product {
 		return $this->getProductID() ? Product::get()->byID($this->getProductID()) : null;
 	}
+	
+	/**
+	 * @return \SilverStripe\ORM\DataObject|null|Product
+	 */
+	public function Product(): ?Product {
+		return $this->getProduct();
+	}
 
 	public function getLink(): string {
 		$product = $this->getProduct();
