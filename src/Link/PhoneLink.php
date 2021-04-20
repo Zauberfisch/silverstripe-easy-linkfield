@@ -27,12 +27,12 @@ class PhoneLink extends AbstractLink {
 		$fields->insertBefore('NewTab',
 			(new TextField('CountryPrefix', $this->fieldLabel('Prefix'), $countryMap))
 				->setAttribute('placeholder', '+43')
-				->setAttribute('pattern', '\+[1-9]+'),
+				->setAttribute('pattern', '\+[1-9]+')
 		);
 		$fields->insertBefore('NewTab',
 			(new TextField('NumberWithoutPrefix', $this->fieldLabel('Number')))
 				->setAttribute('placeholder', '1234567890')
-				->setAttribute('pattern', '[1-9][0-9]*'),
+				->setAttribute('pattern', '[1-9][0-9]*')
 		);
 		$fields->removeByName('NewTab');
 		return $fields;
