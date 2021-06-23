@@ -33,7 +33,7 @@ class FileLink extends AbstractLink {
 	 * @return \SilverStripe\ORM\DataObject|null|File
 	 */
 	public function getFile(): ?File {
-		return $this->getFileID() ? File::get()->byID($this->getFileID()) : null;
+		return $this->getFileID() && isset($this->getFileID()['Files'][0]) ? File::get()->byID($this->getFileID()['Files'][0]) : null;
 	}
 
 	/**
