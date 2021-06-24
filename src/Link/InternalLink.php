@@ -25,8 +25,8 @@ class InternalLink extends AbstractLink {
 		$mapPages = function ($pages, &$arr, $prefix = '') use (&$mapPages) {
 			foreach ($pages as $page) {
 				$arr[$page->ID] = ($prefix ? "$prefix> " : "") . $page->MenuTitle;
-				if ($page->Children()->exists()) {
-					$mapPages($page->Children(), $arr, "$prefix=");
+				if ($page->AllChildren()->exists()) {
+					$mapPages($page->AllChildren(), $arr, "$prefix=");
 				}
 			}
 			return $arr;
@@ -44,7 +44,11 @@ class InternalLink extends AbstractLink {
 	 * @return \SilverStripe\ORM\DataObject|null|SiteTree
 	 */
 	public function getPage(): ?SiteTree {
-		return $this->getPageID() ? SiteTree::get()->byID($this->getPageID()) : null;
+		$page = $this->getPageID() ? SiteTree::get()->byID($this->getPageID()) : null;
+		if ($page && $page->canView()) {
+			return $page;
+		}
+		return null;
 	}
 
 	/**
