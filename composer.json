@@ -18,9 +18,9 @@
 	"require": {
 		"php": "^7.1 || ^8",
 		"ext-json": "*",
-		"silverstripe/framework": "^4.5",
+		"silverstripe/framework": "^4.5 || ^5.0",
 		"silverstripe/vendor-plugin": "*",
-		"zauberfisch/silverstripe-serialized-dataobject": "^4"
+		"zauberfisch/silverstripe-serialized-dataobject": "^4.0.5"
 	},
 	"autoload": {
 		"psr-4": {
